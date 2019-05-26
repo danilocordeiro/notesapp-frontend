@@ -3,40 +3,63 @@
     <div class="offset-3"></div>
     <div class="col-md-6">
       <form name="form" #f='ngForm' novalidate class="feedback-form" (ngSubmit)="sendFeedback()">
-        <div class="form-group">
-          <label for="name">First name</label>
-          <input 
-            type='text' 
-            id='name' 
-            class='form-control' 
-            name="name" 
-            placeholder="Your name" 
-            [(ngModel)]="model.name" />
-        </div>
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput 
+                placeholder="Name" 
+                [formControl]="nameFormControl"
+                [errorStateMatcher]="matcher" 
+                type='text' 
+                id='name'
+                name="name" 
+                [(ngModel)]="model.name">
+              <mat-error *ngIf="nameFormControl.hasError('minlength') && !nameFormControl.hasError('required')">
+                Please enter a name with minimum 5 chars
+              </mat-error>
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+          </mat-form-field>
 
-        <div class="form-group">
-            <label for="email">E-mail</label>
+        <mat-form-field class="example-full-width">
             <input 
+              matInput 
+              placeholder="Email" 
+              [formControl]="emailFormControl"
+              [errorStateMatcher]="matcher" 
               type='text' 
-              id='email' 
-              class='form-control' 
+              id='email'
               name="email" 
-              placeholder="Your e-mail"
-              [(ngModel)]="model.email" />
-        </div>
+              [(ngModel)]="model.email">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-            <label for="feedback">Feedback</label>
+
+        <mat-form-field class="example-full-width">
             <textarea 
-              id="feedback" 
-              class='form-control' 
+              matInput 
+              placeholder="Feedback" 
+              [formControl]="feedbackFormControl"
+              [errorStateMatcher]="matcher" 
+              type='text' 
+              id='feedback'
               name="feedback" 
-              placeholder="Your feedback" 
-              rows="10"
-              [(ngModel)]="model.feedback">
+              [(ngModel)]="model.feedback"
+              rows="10">
             </textarea>
-        </div>
-
+            
+            <mat-error *ngIf="feedbackFormControl.hasError('minlength') && !feedbackFormControl.hasError('required')">
+              Please enter a name with minimum 10 chars
+            </mat-error>
+            <mat-error *ngIf="feedbackFormControl.hasError('required')">
+              Feedback is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
         <button type="submit" class="btn btn-info pull-right">
           <i class="fa fa-envelope-o"></i>
           <span>Send feedback</span>
