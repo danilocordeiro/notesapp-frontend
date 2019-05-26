@@ -31,4 +31,51 @@ export class NotesComponent implements OnInit {
     )
   }
 
+  public createNotebook() {
+    let newNotebook:Notebook = {
+      name: "new Notebook",
+      id: null,
+      nbOfNotes: 0
+
+    }
+
+    this.apiService.postNotebook(newNotebook)
+      .subscribe(
+        res => {
+          newNotebook.id = res.id;
+          this.notebooks.push(newNotebook);
+        },
+        err => {
+          alert("An error has occured while saving the notebook");
+        }
+      );
+  }
+
+  public updateNotebook(notebook:Notebook) {
+    this.apiService.postNotebook(notebook)
+      .subscribe(
+        res => {
+          
+        },
+        err => {
+          alert("An error has occured while saving the notebook");
+        }
+      );
+  }
+
+  public deleteNotebook(notebook:Notebook) {
+    if(confirm("Are you sure??")) {
+      this.apiService.deleteNotebook(notebook)
+        .subscribe(
+          res => {
+            let indexOfNotebook = this.notebooks.indexOf(notebook);
+            this.notebooks.splice(indexOfNotebook, 1);
+          },
+          err => {
+            alert("Could not delete the notebook");
+          }
+        )
+    }
+  }
+
 }

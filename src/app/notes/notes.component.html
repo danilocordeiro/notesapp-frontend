@@ -1,3 +1,40 @@
-<p>
-  notes works!
-</p>
+<div class="container">
+  <div class="row" style="margin-top: 12px;">
+    <div class="col-md-8">
+      <input type="text" class="form-control" style="width: 100%" placeholder="Search notes...">
+    </div>
+    <div class="col-md-4">
+      <button type="button" (click)="createNotebook()" class="btn btn-info pull-right" style="margin-left: 12px;"><i class="fa fa-plus"></i> New notebook</button>
+      <button type="button" class="btn btn-warning pull-right" style="margin-left: 12px;"><i class="fa fa-plus"></i> New note</button>
+    
+    </div>
+  </div>
+  <div class="row" style="margin-top: 28px;">
+    <div class="col-md-3">
+      <br>
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action">
+          <i class="fa fa-book"></i>&nbsp;All
+        </a>
+        <a *ngFor="let notebook of notebooks"  class="list-group-item list-group-item-action">
+          <i class="fa fa-book"></i>&nbsp;
+          <input [(ngModel)]="notebook.name" (change)="updateNotebook(notebook)" type="text" class="input-label" style="width: 80%" />
+          <a (click)="deleteNotebook(notebook)" class="pull-right text-danger">
+            <i class="fa fa-trash"></i>
+          </a>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+  </div>
+</div>
