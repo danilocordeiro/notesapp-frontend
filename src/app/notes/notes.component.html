@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row" style="margin-top: 12px;">
     <div class="col-md-8">
-      <input type="text" class="form-control" style="width: 100%" placeholder="Search notes...">
+      <input [(ngModel)]="searchText" type="text" class="form-control" style="width: 100%" placeholder="Search notes...">
     </div>
     <div class="col-md-4">
       <button type="button" (click)="createNotebook()" class="btn btn-info pull-right" style="margin-left: 12px;"><i class="fa fa-plus"></i> New notebook</button>
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="row">
-        <app-note *ngFor="let note of notes" [note]="note" (noteUpdate)="updateNote($event)"
+        <app-note *ngFor="let note of notes | noteTextFilter:searchText" [note]="note" (noteUpdate)="updateNote($event)"
         (noteDelete)="deleteNote($event)"></app-note>
       </div>
     </div>
