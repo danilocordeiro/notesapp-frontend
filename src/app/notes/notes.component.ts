@@ -140,7 +140,7 @@ export class NotesComponent implements OnInit {
     )
   }
 
-  public updateNote(note:Note) {
+  updateNote(note:Note) {
     this.apiService.saveNote(note)
       .subscribe(
         res => {
